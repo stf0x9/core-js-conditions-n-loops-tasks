@@ -75,41 +75,25 @@ function canQueenCaptureKing(queen, king) {
     return true;
   }
 
-  // -------diagonals------
   function checkDiagonal(queenX, queenY, direction) {
     let [x, y] = [queenX, queenY];
-    if (direction === 'up-left') {
-      while (x > 0 && y < 9) {
-        if (king.x === x && king.y === y) {
-          return true;
-        }
+    while (x > 0 && x < 9 && y > 0 && y < 9) {
+      if (king.x === x && king.y === y) {
+        return true;
+      }
+      if (direction === 'up-left') {
         x -= 1;
         y += 1;
       }
-    }
-    if (direction === 'up-right') {
-      while (x < 9 && y < 9) {
-        if (king.x === x && king.y === y) {
-          return true;
-        }
+      if (direction === 'up-right') {
         x += 1;
         y += 1;
       }
-    }
-    if (direction === 'down-right') {
-      while (x < 9 && y > 0) {
-        if (king.x === x && king.y === y) {
-          return true;
-        }
+      if (direction === 'down-right') {
         x += 1;
         y -= 1;
       }
-    }
-    if (direction === 'down-left') {
-      while (x > 0 && y > 0) {
-        if (king.x === x && king.y === y) {
-          return true;
-        }
+      if (direction === 'down-left') {
         x -= 1;
         y -= 1;
       }
@@ -118,25 +102,21 @@ function canQueenCaptureKing(queen, king) {
   }
 
   if (king.x > queen.x) {
-    // ------up-right-----
     if (king.y > queen.y) {
       return !!checkDiagonal(queen.x, queen.y, 'up-right');
     }
-    // ----down-right----
     if (king.y < queen.y) {
       return !!checkDiagonal(queen.x, queen.y, 'down-right');
     }
   } else {
     // (king.x < queen.x)
-    // ----up-left----
     if (king.y > queen.y) {
       return !!checkDiagonal(queen.x, queen.y, 'up-left');
     }
-    // -----down-left----
     if (king.y < queen.y) {
       return !!checkDiagonal(queen.x, queen.y, 'down-left');
     }
-  } // end diagonals
+  }
   return false;
 }
 
