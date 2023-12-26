@@ -76,8 +76,8 @@ function canQueenCaptureKing(queen, king) {
   }
 
   // -------diagonals------
-  function checkDiagonal(qX, qY, direction) {
-    let [x, y] = [qX, qY];
+  function checkDiagonal(queenX, queenY, direction) {
+    let [x, y] = [queenX, queenY];
     if (direction === 'up-left') {
       while (x > 0 && y < 9) {
         if (king.x === x && king.y === y) {
@@ -158,8 +158,17 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === b) {
+    return a + b > c ? c !== 0 : false;
+  }
+  if (a === c) {
+    return a + c > b ? b !== 0 : false;
+  }
+  if (b === c) {
+    return b + c > a ? a !== 0 : false;
+  }
+  return false;
 }
 
 /**
