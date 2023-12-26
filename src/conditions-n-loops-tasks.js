@@ -69,8 +69,75 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  // straight line
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+
+  // -------diagonals------
+  function checkDiagonal(qX, qY, direction) {
+    let [x, y] = [qX, qY];
+    if (direction === 'up-left') {
+      while (x > 0 && y < 9) {
+        if (king.x === x && king.y === y) {
+          return true;
+        }
+        x -= 1;
+        y += 1;
+      }
+    }
+    if (direction === 'up-right') {
+      while (x < 9 && y < 9) {
+        if (king.x === x && king.y === y) {
+          return true;
+        }
+        x += 1;
+        y += 1;
+      }
+    }
+    if (direction === 'down-right') {
+      while (x < 9 && y > 0) {
+        if (king.x === x && king.y === y) {
+          return true;
+        }
+        x += 1;
+        y -= 1;
+      }
+    }
+    if (direction === 'down-left') {
+      while (x > 0 && y > 0) {
+        if (king.x === x && king.y === y) {
+          return true;
+        }
+        x -= 1;
+        y -= 1;
+      }
+    }
+    return false;
+  }
+
+  if (king.x > queen.x) {
+    // ------up-right-----
+    if (king.y > queen.y) {
+      return !!checkDiagonal(queen.x, queen.y, 'up-right');
+    }
+    // ----down-right----
+    if (king.y < queen.y) {
+      return !!checkDiagonal(queen.x, queen.y, 'down-right');
+    }
+  } else {
+    // (king.x < queen.x)
+    // ----up-left----
+    if (king.y > queen.y) {
+      return !!checkDiagonal(queen.x, queen.y, 'up-left');
+    }
+    // -----down-left----
+    if (king.y < queen.y) {
+      return !!checkDiagonal(queen.x, queen.y, 'down-left');
+    }
+  } // end diagonals
+  return false;
 }
 
 /**
