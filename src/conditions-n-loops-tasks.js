@@ -170,6 +170,14 @@ function convertToRomanNumerals(num) {
   const tens = Math.floor(num / 10);
   const ones = num - tens * 10;
 
+  function repeatLetter(letter, times) {
+    let str = '';
+    for (let i = 0; i < times; i += 1) {
+      str += letter;
+    }
+    return str;
+  }
+
   function generateNumeral(placeOfDigit, next, current, five) {
     let digit = '';
     switch (placeOfDigit) {
@@ -177,10 +185,10 @@ function convertToRomanNumerals(num) {
         digit += `${current}${next}`;
         break;
       case 8:
-        digit += `${five}${current}${current}${current}`;
+        digit += `${five}${repeatLetter(current, 3)}`;
         break;
       case 7:
-        digit += `${five}${current}${current}`;
+        digit += `${five}${repeatLetter(current, 2)}`;
         break;
       case 6:
         digit += `${five}${current}`;
@@ -192,10 +200,10 @@ function convertToRomanNumerals(num) {
         digit += `${current}${five}`;
         break;
       case 3:
-        digit += `${current}${current}${current}`;
+        digit += `${repeatLetter(current, 3)}`;
         break;
       case 2:
-        digit += `${current}${current}`;
+        digit += `${repeatLetter(current, 2)}`;
         break;
       case 1:
         digit += `${current}`;
