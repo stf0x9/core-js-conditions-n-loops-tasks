@@ -235,21 +235,38 @@ function convertToRomanNumerals(num) {
  *  '1950.2'  => 'one nine five zero point two'
  */
 function convertNumberToString(numberStr) {
-  const namesOfValues = {
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-    0: 'zero',
-    ',': 'point',
-    '.': 'point',
-    '-': 'minus',
-  };
+  function convert(digit) {
+    switch (digit) {
+      case '1':
+        return 'one';
+      case '2':
+        return 'two';
+      case '3':
+        return 'three';
+      case '4':
+        return 'four';
+      case '5':
+        return 'five';
+      case '6':
+        return 'six';
+      case '7':
+        return 'seven';
+      case '8':
+        return 'eight';
+      case '9':
+        return 'nine';
+      case '0':
+        return 'zero';
+      case ',':
+        return 'point';
+      case '.':
+        return 'point';
+      case '-':
+        return 'minus';
+      default:
+        return false;
+    }
+  }
 
   let str = '';
 
@@ -258,10 +275,10 @@ function convertNumberToString(numberStr) {
 
     switch (str.length) {
       case 0:
-        str += namesOfValues[digit];
+        str += convert(digit);
         break;
       default:
-        str += ` ${namesOfValues[digit]}`;
+        str += ` ${convert(digit)}`;
     }
   }
 
