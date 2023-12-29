@@ -89,7 +89,7 @@ describe('core-js-conditions-n-loops', () => {
         false
       );
       assert.equal(
-        forbidden.isCommented(tasks.getMaxNumber),
+        forbidden.isCommented(tasks.canQueenCaptureKing),
         false,
         `Be sure to remove comments from the final solution`
       );
@@ -635,7 +635,7 @@ describe('core-js-conditions-n-loops optimal implementation', () => {
   });
 
   it.optional('speed test of getNearestBigger', function test() {
-    this.slow(1);
+    this.slow(5);
     this.timeout(10);
     assert.deepEqual(tasks.getNearestBigger(sourceNumber), nearestNumber);
   });
