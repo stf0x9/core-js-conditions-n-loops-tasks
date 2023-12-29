@@ -70,7 +70,6 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
 function canQueenCaptureKing(queen, king) {
-  // straight line
   if (queen.x === king.x || queen.y === king.y) {
     return true;
   }
@@ -109,7 +108,6 @@ function canQueenCaptureKing(queen, king) {
       return !!checkDiagonal(queen.x, queen.y, 'down-right');
     }
   } else {
-    // (king.x < queen.x)
     if (king.y > queen.y) {
       return !!checkDiagonal(queen.x, queen.y, 'up-left');
     }
