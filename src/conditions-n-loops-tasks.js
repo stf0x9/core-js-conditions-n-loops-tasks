@@ -609,8 +609,79 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  const string = `${number}`;
+
+  function findMinIndexGreaterThanX(str, x, indexFirst) {
+    let minIndex = -1;
+    let minValue = 10;
+
+    for (let i = str.length - 1; i > indexFirst; i -= 1) {
+      if (+str[i] > x && +str[i] < minValue) {
+        minValue = str[i];
+        minIndex = i;
+      }
+    }
+    return minIndex;
+  }
+
+  function swapValues(str, firstIndex, secondIndex) {
+    const arr = Array.from(str);
+    const valueOne = str[firstIndex];
+    const valueTwo = str[secondIndex];
+    arr[firstIndex] = valueTwo;
+    arr[secondIndex] = valueOne;
+    return arr.join('');
+  }
+
+  function getSortedStrAfterIndex(str, index) {
+    let newStr = '';
+    for (let i = index + 1; i < str.length; i += 1) {
+      newStr += str[i];
+    }
+
+    const arr = Array.from(newStr);
+    const sorted = arr.sort((a, b) => +a - +b).join('');
+    return sorted;
+  }
+
+  function getStringWithoutSort(str, index) {
+    let newStr = '';
+    for (let i = 0; i < index + 1; i += 1) {
+      newStr += str[i];
+    }
+    return newStr;
+  }
+
+  function findLastIndexOfDigitSmallerThanNext(str) {
+    let current = str[str.length - 1];
+    let indexFirst;
+
+    for (let i = str.length - 2; i >= 0; i -= 1) {
+      const next = str[i];
+      if (+next < +current) {
+        indexFirst = i;
+        break;
+      }
+      current = next;
+    }
+
+    if (indexFirst) {
+      const indexSecond = findMinIndexGreaterThanX(
+        str,
+        str[indexFirst],
+        indexFirst
+      );
+      const swappedStr = swapValues(str, indexFirst, indexSecond);
+      const sortedStr = getSortedStrAfterIndex(swappedStr, indexFirst);
+      const unsortedStr = getStringWithoutSort(swappedStr, indexFirst);
+      const resultNumber = +(unsortedStr + sortedStr);
+      return resultNumber;
+    }
+
+    return number;
+  }
+  return findLastIndexOfDigitSmallerThanNext(string);
 }
 
 module.exports = {
